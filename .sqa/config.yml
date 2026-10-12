@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.guidelines.main-office:
+      branch: master
+      repo: https://github.com/cessda/cessda.guidelines.main-office
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.guidelines.main-office git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wave_radiant_cougar.sh
+        container: qc.acc_pistachio_tenacious_kraken
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.guidelines.main-office find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.mist_loyal_warthog.sh
+        container: qc.doc_ecru_shrewd_baboon
+      github.com/cessda/cessda.guidelines.main-office git:
+        commands:
+        - /usr/bin/env sh .sqa/script.onyx_decisive_hawk.sh
+        container: qc.doc_ochre_eccentric_toucan
+      github.com/cessda/cessda.guidelines.main-office markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.isabelline_dramatic_quokka.sh
+        container: qc.doc_steel_affectionate_pangolin
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.guidelines.main-office licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.jet_sweet_okapi.sh
+        container: qc.lic_pearl_adventurous_chinchilla
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.guidelines.main-office jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.zinnia_tranquil_dolphin.sh
+        container: qc.sty_polar_vibrant_tortoise
+      github.com/cessda/cessda.guidelines.main-office rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.pansy_playful_panther.sh
+        container: qc.sty_cosmos_tough_chameleon
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.guidelines.main-office get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.zinnia_assured_ibis.sh
+        container: qc.ver_raven_fair_hamster
+timeout: 5400
